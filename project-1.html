@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+
+    <title>Zach's Design Projects.</title>
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- import the webpage's javascript file -->
+    <script src="/script.js" defer></script>
+  </head>
+  <header>
+    <div id="navbar">
+      <ul>
+        <li><a href="index.html">Home |</a></li>
+        <li><a href="project-1.html">D&D Stat Generator(WIP) |</a></li>
+        <li><a href="contact.html">Contact Me</a></li>
+      </ul>
+    </div>
+  </header>
+  <body>
+    <div class="mainHeader">
+      <h2>
+        D&D Stat generator!!!
+      </h2>
+    </div>
+    <div class="mainBody">
+      <div id="statGen">
+        <p id="stat1">
+          ,
+        </p>
+        <p id="stat2">
+          .
+        </p>
+        <p id="stat3">
+          .
+        </p>
+        <p id="stat4">
+          .
+        </p>
+        <p id="stat5">
+          .
+        </p>
+        <p id="stat6">
+          .
+        </p>
+      </div>
+      <div id="statGenButtons">
+      <button onclick="pickStat(0)">Grab</button>
+      <br />
+      <button onclick="pickStat(1)">Grab</button>
+      <br />
+      <button onclick="pickStat(2)">Grab</button>
+      <br />
+      <button onclick="pickStat(3)">Grab</button>
+      <br />
+      <button onclick="pickStat(4)">Grab</button>
+      <br />
+      <button onclick="pickStat(5)">Grab</button>
+      <br />
+      </div>
+      <div>
+        <button onclick="getStats()">Get Stats!</button>  
+      </div>
+      <div id="placeStatsButtons">
+      <button onclick="placeNumber(0)">STR:</button>
+      <br />
+      <button onclick="placeNumber(1)">DEX:</button>
+      <br />
+      <button onclick="placeNumber(2)">CON</button>
+      <br />
+      <button onclick="placeNumber(3)">WIS</button>
+      <br />
+      <button onclick="placeNumber(4)">INT</button>
+      <br />
+      <button onclick="placeNumber(5)">CHA</button>
+      <br />
+      </div>
+      <div id="placedStats">
+        <p id="str">
+          .
+        </p>
+        <p id="dex">
+          .
+        </p>
+        <p id="con">
+          .
+        </p>
+        <p id="wis">
+          .
+        </p>
+        <p id="int">
+          .
+        </p>
+        <p id="cha">
+          .
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
