@@ -120,7 +120,10 @@ function commitStats(){
   sessionStorage.setItem("stats", JSON.stringify(commitedStats));
 }
 //Sets the Player object, for their "character sheet"
-let player = {Class: "Default", Level: 1, HP: 0, Stats: [0, 0, 0, 0, 0, 0], HitDie: 0, statMods: [] }
+let player = {Class: "Default", Level: 1, HP: 0, AC: 0, Stats: [0, 0, 0, 0, 0, 0], HitDie: 0, statMods: [] }
+
+let goblin = {HP: 7, AC: 15, Stats: [8, 14, 10, 10, 8, 8], statMods: [-1, +2, 0, 0, -1, -1]}
+
 //Generates the players class between the 2 opitions given
 function playerGenerationClass(job){
   switch(job){
@@ -143,11 +146,30 @@ function playerGenerationClass(job){
   for(let i = 0; i < player.Stats.length; i++){
     player.statMods.push(Math.floor((player.Stats[i] - 10) / 2));
   }
-  player.HP = Math.floor(player.HitDie + player.statMods[2]); 
+  player.HP = Math.floor(player.HitDie + player.statMods[2]);
+  if(player.Class === "Warrior"){
+    player.AC = 16;
+  } 
+  else if(player.Class === "Wizard"){
+    player.AC = 11 + player.statMods[1];
+  }
+  document.getElementById("playerAC").innerHTML = player.AC;
   console.log(player);
 }
 //Originally a test, will have to rename soon, but this brings the commited stats to the current player sheet.
 function testCommitedStats(){
   player.Stats = JSON.parse(sessionStorage.getItem('stats'));
   console.log(player.Stats);
+}
+let maxPlayerHP = player.HP;
+let currentPlayerHP = player.HP
+let currentGoblinHP = goblin.HP;
+//Test function for Goblin HP
+function testGoblinHp(){
+  let damage = rollDice(6);
+  damage += player.statMods[0];
+  console.log(damage);
+  currentGoblinHP -= damage;
+  console.log(currentGoblinHP);
+  document.getElementById('goblinHP').innerHTML = currentGoblinHP + "/7";
 }
