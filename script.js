@@ -1,6 +1,10 @@
-/* If you're feeling fancy you can add interactivity 
-    to your site with Javascript */
 let x;
+let commitedStats =[];
+
+function test(){
+  console.log('A button was pushed!')
+}
+
 function alertJoe() {
   document.getElementById("resultsGoHere").innerHTML = "Congrats!";
 }
@@ -43,56 +47,13 @@ function getStats() {
   document.getElementById("stat6").innerHTML = stat6;
 }
 
-/*function getStats() {
-  let rand, str2, dex2, con2, wis2, int2, cha2, statTotal2, totalrolls2;
-  let stats = [];
-  statTotal2 = 0;
-  totalrolls2 = 0;
-  while (statTotal2 < 70) {
-    for (let t = 0; t < 6; t++) {
-      let total3 = 0;
-      let lowest = 6;
-      //let x = 1;
-      for (let o = 0; o < 4; o++) {
-        rand = rollDice(6);
-        if (rand < lowest) {
-          lowest = rand;
-        }
-        total3 += rand;
-      }
-      total3 -= lowest;
-      stats.push(total3);
-    }
-    statTotal2 =
-      stats[0] + stats[1] + stats[2] + stats[3] + stats[4] + stats[5];
-    totalrolls2++;
-    if (statTotal2 < 70) {
-      stats = [];
-    }
-  }
-  str2 = stats[0];
-  dex2 = stats[1];
-  con2 = stats[2];
-  wis2 = stats[3];
-  int2 = stats[4];
-  cha2 = stats[5];
-  document.getElementById("stat1").innerHTML = stats[0];
-  document.getElementById("stat2").innerHTML = stats[1];
-  document.getElementById("stat3").innerHTML = stats[2];
-  document.getElementById("stat4").innerHTML = stats[3];
-  document.getElementById("stat5").innerHTML = stats[4];
-  document.getElementById("stat6").innerHTML = stats[5];
-}*/
-
 function rollDice(sides) {
   return Math.floor(Math.random() * sides) + 1;
 }
 function rollDiceButton(sides) {
   document.getElementById("resultsGoHere").innerHTML = rollDice(sides);
 }
-//console.log("Hello, Dan, how are you this morning?");
-//console.log("Also try clicking What in the first page");
-//alert('Don\'t judge, currently broken.')
+
 function callText() {
   document.getElementById("resultsGoHere").innerHTML = "Test?";
 }
@@ -145,18 +106,37 @@ function placeNumber(stat) {
   }
 }
 
+function commitStats(){
+  commitedStats.push(document.getElementById("str").innerHTML);
+  commitedStats.push(document.getElementById("dex").innerHTML);
+  commitedStats.push(document.getElementById("con").innerHTML);
+  commitedStats.push(document.getElementById("wis").innerHTML);
+  commitedStats.push(document.getElementById("int").innerHTML);
+  commitedStats.push(document.getElementById("cha").innerHTML);
+  sessionStorage.setItem("stats", JSON.stringify(commitedStats));
+}
+
 let player = {Class: "Default", Level: 1, Stats: [0, 0, 0, 0, 0, 0] }
 
-function playerGeneration(job){
+function playerGenerationClass(job){
   switch(job){
     //If the player chooses the Warrior job.
     case 0:
     player.Class = "Warrior";
     break;
     case 1:
-    player.class = "Wizard";
+    //If the player chooses the wizard job.
+    player.Class = "Wizard";
     break;
-    console.log(player.Class);
-    document.getElementById("results").innerHTML = "You are a " + player.Class;
+    default:
+    player.Class = "Default";
+    break;
   }
+  console.log(player);
+  document.getElementById("results").innerHTML = "You are a " + player.Class;
+}
+
+function testCommitedStats(){
+  player.Stats = JSON.parse(sessionStorage.getItem('stats'));
+  console.log(player.Stats);
 }
