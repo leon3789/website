@@ -1,6 +1,6 @@
 let x;
 let commitedStats =[];
-
+//These 2 functions are nonsense I made while trying to get a hang of adding text to the webpage, safe to ignore. 
 function test(){
   console.log('A button was pushed!')
 }
@@ -8,12 +8,12 @@ function test(){
 function alertJoe() {
   document.getElementById("resultsGoHere").innerHTML = "Congrats!";
 }
-
+//Rolls stats for D&D 5e using the "Roll 4 d6, drop the lowest".
 function getStats() {
   let rand, total, lowest, stat1, stat2, stat3, stat4, stat5, stat6, statTotal;
   let stats = [];
   statTotal = 0;
-
+//Personal home rule in my D&D games, the site will re roll the stats until the total of all 6 stats is over 70.
   while (statTotal < 70) {
     for (let i = 0; i < 6; i++) {
       total = 0;
@@ -33,6 +33,7 @@ function getStats() {
       stats = [];
     }
   }
+  //Ties the stats generated into the HTML. Could likely tidy this up later.
   stat1 = stats[0];
   stat2 = stats[1];
   stat3 = stats[2];
@@ -46,10 +47,11 @@ function getStats() {
   document.getElementById("stat5").innerHTML = stat5;
   document.getElementById("stat6").innerHTML = stat6;
 }
-
+//Simple die rolling function. Will generate a random number between 1 and any number you enter, only used in buttons for predetermined die.
 function rollDice(sides) {
   return Math.floor(Math.random() * sides) + 1;
 }
+//More throw away code safe to ignore.
 function rollDiceButton(sides) {
   document.getElementById("resultsGoHere").innerHTML = rollDice(sides);
 }
@@ -57,6 +59,7 @@ function rollDiceButton(sides) {
 function callText() {
   document.getElementById("resultsGoHere").innerHTML = "Test?";
 }
+//After generating stats on Project 1, this function will allow the user to "grab" stats and store them.
 function pickStat(number) {
   switch (number) {
     case 0:
@@ -81,6 +84,7 @@ function pickStat(number) {
       console.log("Error!");
   }
 }
+//Then this function will allow players to place a "stored" stat, to decide where they want their stats to go.
 function placeNumber(stat) {
   switch (stat) {
     case 0:
@@ -105,7 +109,7 @@ function placeNumber(stat) {
       console.log("Error!");
   }
 }
-
+//commits the stats for the battle page.
 function commitStats(){
   commitedStats.push(document.getElementById("str").innerHTML);
   commitedStats.push(document.getElementById("dex").innerHTML);
@@ -115,9 +119,9 @@ function commitStats(){
   commitedStats.push(document.getElementById("cha").innerHTML);
   sessionStorage.setItem("stats", JSON.stringify(commitedStats));
 }
-
+//Sets the Player object, for their "character sheet"
 let player = {Class: "Default", Level: 1, HP: 0, Stats: [0, 0, 0, 0, 0, 0], HitDie: 0, statMods: [] }
-
+//Generates the players class between the 2 opitions given
 function playerGenerationClass(job){
   switch(job){
     //If the player chooses the Warrior job.
@@ -142,7 +146,7 @@ function playerGenerationClass(job){
   player.HP = Math.floor(player.HitDie + player.statMods[2]); 
   console.log(player);
 }
-
+//Originally a test, will have to rename soon, but this brings the commited stats to the current player sheet.
 function testCommitedStats(){
   player.Stats = JSON.parse(sessionStorage.getItem('stats'));
   console.log(player.Stats);
