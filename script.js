@@ -1,5 +1,7 @@
 let x;
 let commitedStats =[];
+let maxPlayerHP;
+let currentPlayerHP;
 //These 2 functions are nonsense I made while trying to get a hang of adding text to the webpage, safe to ignore. 
 function test(){
   console.log('A button was pushed!')
@@ -154,6 +156,11 @@ function playerGenerationClass(job){
     player.AC = 11 + player.statMods[1];
   }
   document.getElementById("playerAC").innerHTML = player.AC;
+  maxPlayerHP = player.HP;
+  currentPlayerHP = player.HP;
+  console.log(currentPlayerHP);
+  console.log(maxPlayerHP);
+  document.getElementById("playerHP").innerHTML = currentPlayerHP + "/" + maxPlayerHP;
   console.log(player);
 }
 //Originally a test, will have to rename soon, but this brings the commited stats to the current player sheet.
@@ -161,8 +168,6 @@ function testCommitedStats(){
   player.Stats = JSON.parse(sessionStorage.getItem('stats'));
   console.log(player.Stats);
 }
-let maxPlayerHP = player.HP;
-let currentPlayerHP = player.HP
 let currentGoblinHP = goblin.HP;
 //Test function for Goblin HP
 function testGoblinHp(){
