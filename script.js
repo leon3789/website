@@ -116,24 +116,31 @@ function commitStats(){
   sessionStorage.setItem("stats", JSON.stringify(commitedStats));
 }
 
-let player = {Class: "Default", Level: 1, Stats: [0, 0, 0, 0, 0, 0] }
+let player = {Class: "Default", Level: 1, HP: 0, Stats: [0, 0, 0, 0, 0, 0], HitDie: 0, statMods: [] }
 
 function playerGenerationClass(job){
   switch(job){
     //If the player chooses the Warrior job.
     case 0:
     player.Class = "Warrior";
+    player.HitDie = 10;
     break;
     case 1:
     //If the player chooses the wizard job.
     player.Class = "Wizard";
+    player.HitDie = 6;
     break;
     default:
     player.Class = "Default";
     break;
   }
-  console.log(player);
   document.getElementById("results").innerHTML = "You are a " + player.Class;
+  //Get's the stat mods into an array.
+  for(let i = 0; i < player.Stats.length; i++){
+    player.statMods.push(Math.floor((player.Stats[i] - 10) / 2));
+  }
+  player.HP = Math.floor(player.HitDie + player.statMods[2]); 
+  console.log(player);
 }
 
 function testCommitedStats(){
