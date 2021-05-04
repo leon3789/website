@@ -114,11 +114,11 @@ function placeNumber(stat) {
 //D&D monster factory
 const enemyFactory = (name, hp, ac, stats, statMods) => {
   return {
-    name: name,
-    hp: hp,
-    ac: ac,
-    stats: stats,
-    statMods: statMods
+    name,
+    hp,
+    ac,
+    stats,
+    statMods
   }
 };
 //commits the stats for the battle page.
