@@ -111,6 +111,16 @@ function placeNumber(stat) {
       console.log("Error!");
   }
 }
+//D&D monster factory
+const enemyFactory = (name, hp, ac, stats, statMods) => {
+  return {
+    name: name,
+    hp: hp,
+    ac: ac,
+    stats: stats,
+    statMods: statMods
+  }
+};
 //commits the stats for the battle page.
 function commitStats(){
   commitedStats.push(document.getElementById("str").innerHTML);
@@ -124,7 +134,11 @@ function commitStats(){
 //Sets the Player object, for their "character sheet"
 let player = {Class: "Default", Level: 1, HP: 0, AC: 0, Stats: [0, 0, 0, 0, 0, 0], HitDie: 0, statMods: [] }
 
-let goblin = {HP: 7, AC: 15, Stats: [8, 14, 10, 10, 8, 8], statMods: [-1, +2, 0, 0, -1, -1]}
+const goblin = enemyFactory('Goblin', 7, 15, [8,14,10,10,8,8], [-1, +2, 0, 0 ,-1, -1]);
+
+const steveTheCommoner = enemyFactory('Steve', 4, 10, [10, 10, 10, 10, 10, 10], [0, 0, 0, 0, 0, 0])
+
+//let goblin = {HP: 7, AC: 15, Stats: [8, 14, 10, 10, 8, 8], statMods: [-1, +2, 0, 0, -1, -1]}
 
 //Generates the players class between the 2 opitions given
 function playerGenerationClass(job){
@@ -162,13 +176,15 @@ function playerGenerationClass(job){
   console.log(maxPlayerHP);
   document.getElementById("playerHP").innerHTML = currentPlayerHP + "/" + maxPlayerHP;
   console.log(player);
+  const mirrorMatch = enemyFactory('???', player.HP, player.AC, player.Stats, player.statMods);
+  console.log(mirrorMatch);
 }
 //Originally a test, will have to rename soon, but this brings the commited stats to the current player sheet.
 function testCommitedStats(){
   player.Stats = JSON.parse(sessionStorage.getItem('stats'));
   console.log(player.Stats);
 }
-let currentGoblinHP = goblin.HP;
+let currentGoblinHP = goblin.hp;
 //Test function for Goblin HP
 function testGoblinHp(){
   let damage = rollDice(6);
@@ -177,4 +193,6 @@ function testGoblinHp(){
   currentGoblinHP -= damage;
   console.log(currentGoblinHP);
   document.getElementById('goblinHP').innerHTML = currentGoblinHP + "/7";
+  console.log(goblin);
+  console.log(steveTheCommoner);
 }
