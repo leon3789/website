@@ -4,14 +4,14 @@ let maxPlayerHP;
 let currentPlayerHP;
 //These 2 functions are nonsense I made while trying to get a hang of adding text to the webpage, safe to ignore. 
 function test(){
-  console.log('A button was pushed!')
+  document.querySelectorAll(stat);
 }
 
 function alertJoe() {
   document.getElementById("resultsGoHere").innerHTML = "Congrats!";
 }
 //Rolls stats for D&D 5e using the "Roll 4 d6, drop the lowest".
-function getStats() {
+async function getStats() {
   let rand, total, lowest, stat1, stat2, stat3, stat4, stat5, stat6, statTotal;
   let stats = [];
   statTotal = 0;
@@ -30,13 +30,19 @@ function getStats() {
       total -= lowest;
       stats.push(total);
     }
+    const reducer = (accumulator, currentValue) => {accumulator + currentValue};
+    //statTotal = stats.reduce(reducer, 0);
+    console.log(statTotal);
     statTotal = stats[0] + stats[1] + stats[2] + stats[3] + stats[4] + stats[5];
     if (statTotal < 70) {
       stats = [];
     }
   }
   //Ties the stats generated into the HTML. Could likely tidy this up later.
-  stat1 = stats[0];
+  for(let i = 0; i < 6; i++){
+    console.log(document.getElementById(`stat${i.toString}`).innerHTML = stats[i]);
+  }
+  /*stat1 = stats[0];
   stat2 = stats[1];
   stat3 = stats[2];
   stat4 = stats[3];
@@ -47,15 +53,32 @@ function getStats() {
   document.getElementById("stat3").innerHTML = stat3;
   document.getElementById("stat4").innerHTML = stat4;
   document.getElementById("stat5").innerHTML = stat5;
-  document.getElementById("stat6").innerHTML = stat6;
+  document.getElementById("stat6").innerHTML = stat6;*/
 }
 //Simple die rolling function. Will generate a random number between 1 and any number you enter, only used in buttons for predetermined die.
 function rollDice(sides) {
   return Math.floor(Math.random() * sides) + 1;
+
 }
 //More throw away code safe to ignore.
 function rollDiceButton(sides) {
   document.getElementById("resultsGoHere").innerHTML = rollDice(sides);
+}
+
+function slowDiceRoll(num){
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {resolve(rollDice(num));}, generateRandomDelay());
+  });
+}
+
+const slowRoller = async (num) => {
+  //console.log(await slowDiceRoll());
+  //document.getElementById("resultsGoHere").innerHTML = await slowDiceRoll();
+  return await slowDiceRoll(num);
+}
+
+function generateRandomDelay(){
+  return Math.floor(Math.random() * 5000);
 }
 
 function callText() {

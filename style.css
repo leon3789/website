@@ -84,8 +84,9 @@ body p{
 }
 
 .mainHeader{
-  background-color:#3492eb;
+  background:url(https://cdn.glitch.com/8ec18f39-4579-40a9-b6b4-abb69922a9e4%2FMonthly-Website-Header-background.jpg?v=1623760665678) no-repeat center;
   padding:10px;
+  margin:0px;
   font-size:25px;
 }
 
